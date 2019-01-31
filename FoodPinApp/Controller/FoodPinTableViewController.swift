@@ -91,6 +91,10 @@ class FoodPinTableViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func cancel(segue:UIStoryboardSegue){
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.

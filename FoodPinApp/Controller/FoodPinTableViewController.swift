@@ -9,17 +9,26 @@
 import UIKit
 import CoreData
 
-class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionDelegate,NSFetchedResultsControllerDelegate {
+class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionDelegate,NSFetchedResultsControllerDelegate,UISearchResultsUpdating {
     
     
-
     var restaurants:[RestaurantMO] = []
     var fetchResultController:NSFetchedResultsController<RestaurantMO>!
+    
+    var searchController:UISearchController!
+    var searchResults:[RestaurantMO] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         loadRestaurants()
+        searchController = UISearchController(searchResultsController: nil)
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.placeholder = "Search Restaurants.."
+        searchController.searchBar.barTintColor = UIColor(red: 218.0/255.0, green: 100.0/255.0, blue: 70.0/255.0, alpha: 0.5)
+        searchController.dimsBackgroundDuringPresentation = false
     }
     
     func loadRestaurants(){
@@ -45,6 +54,24 @@ class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionD
        //  self.tableView.reloadData()
         }
     }
+    
+    func performSearch(for searchText:String){
+        searchResults = restaurants.filter({ (restaurant) -> Bool in
+            if let name = restaurant.name{
+                if searchText.isEmpty{
+                    return true
+                }
+                return name.localizedCaseInsensitiveContains(searchText)
+            }
+            return false;
+        })
+    }
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text{
+            performSearch(for: searchText)
+            tableView.reloadData()
+        }
+    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,22 +79,35 @@ class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionD
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurants.count
+        if searchController.isActive{
+            return searchResults.count
+        }
+        else{
+            return restaurants.count
+        }
+        
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodCell", for: indexPath) as! RestaurantTableViewCell
         
-        cell.restaurantName.text = restaurants[indexPath.row].name
-        cell.restaurantLocation.text = restaurants[indexPath.row].location
-        cell.restaurantType.text = restaurants[indexPath.row].type
-        cell.restaurantImage.image =  UIImage(data: restaurants[indexPath.row].image! )
+        let restaurant = searchController.isActive ? searchResults[indexPath.row] : restaurants[indexPath.row]
+        
+        cell.restaurantName.text = restaurant.name
+        cell.restaurantLocation.text = restaurant.location
+        cell.restaurantType.text = restaurant.type
+        cell.restaurantImage.image =  UIImage(data: restaurant.image! )
         cell.restaurantImage.layer.cornerRadius = 30
         cell.restaurantImage.clipsToBounds = true
+        cell.accessoryType = restaurant.isVisited ? .checkmark : .none
         
         return cell
         
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return !searchController.isActive
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -96,7 +136,7 @@ class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionD
         if segue.identifier == "showDetail"{
             if let indexPath = tableView.indexPathForSelectedRow{
                  let destination = segue.destination as! FoodPinDetailViewController
-                destination.restaurant = restaurants[indexPath.row];
+                destination.restaurant = searchController.isActive ? searchResults[indexPath.row] : restaurants[indexPath.row]
             }
         }
         if segue.identifier == "addRestaurant"{

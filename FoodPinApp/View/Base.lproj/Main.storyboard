@@ -83,7 +83,7 @@
                     <navigationItem key="navigationItem" title="FoodPin" id="ubc-6v-0RC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KKF-7S-XZ2">
                             <connections>
-                                <segue destination="nNE-TN-hbS" kind="presentation" id="j30-9h-ccm"/>
+                                <segue destination="nNE-TN-hbS" kind="presentation" identifier="addRestaurant" id="hFe-Pj-GCT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -15,21 +15,21 @@ class FoodPinDetailViewController: UIViewController,UITableViewDelegate,UITableV
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var restaurantImage: UIImageView!
     @IBOutlet weak var mapView:MKMapView!
-    var restaurant:Restaurant!
+    var restaurant:RestaurantMO!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.white
         //tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = UIColor.lightGray
-        restaurantImage.image = UIImage(named: restaurant.image)
+        restaurantImage.image = UIImage(data: restaurant.image!)
         title = restaurant.name
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openMap))
         mapView.addGestureRecognizer(tapGesture)
         
         let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(restaurant.location) { (placemarks, error) in
+        geoCoder.geocodeAddressString(restaurant.location!) { (placemarks, error) in
             
             if error == nil{
                 if let placemarks = placemarks{

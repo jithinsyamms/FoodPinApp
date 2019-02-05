@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import CoreData
+
+protocol AddRestaurantCompletionDelegate {
+    func restaurantAdded()
+}
+
 
 class AddRestaurantController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
@@ -18,6 +24,11 @@ class AddRestaurantController: UITableViewController,UIImagePickerControllerDele
     
     @IBOutlet weak var yesButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
+    
+    var restaurant:RestaurantMO!
+    var isVisited:Bool = false
+    
+    var delegate:AddRestaurantCompletionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,14 +77,35 @@ class AddRestaurantController: UITableViewController,UIImagePickerControllerDele
             present(alertController, animated: true, completion: nil)
             
         }
+        else{
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+                restaurant = RestaurantMO(context: appDelegate.persistentContainer.viewContext)
+                restaurant.name = nameField.text
+                restaurant.type = typeField.text
+                restaurant.location = locationField.text
+                restaurant.isVisited = isVisited
+                
+                if let image = photoView.image{
+                    if let imageData = image.pngData(){
+                        restaurant.image = NSData(data: imageData) as Data
+                    }
+                }
+                appDelegate.saveContext()
+                dismiss(animated:true, completion: nil)
+                delegate?.restaurantAdded()
+            }
+            
+        }
     }
     
     @IBAction func toggleBeenHere(sender:UIButton){
         if sender.tag == 0{
+            isVisited = true
             yesButton.backgroundColor = UIColor.red
             noButton.backgroundColor = UIColor.lightGray
         }
         else{
+            isVisited = false
             yesButton.backgroundColor = UIColor.lightGray
             noButton.backgroundColor = UIColor.red
         }

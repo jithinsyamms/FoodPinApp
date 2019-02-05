@@ -77,8 +77,14 @@ class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionD
         }
         shareAction.backgroundColor = UIColor.lightGray
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
-            self.restaurants.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+                let context = appDelegate.persistentContainer.viewContext
+                let objectToDelete = self.fetchResultController.object(at: indexPath)
+                context.delete(objectToDelete)
+                appDelegate.saveContext()
+            }
+            
             
         }
         deleteAction.backgroundColor = UIColor.red

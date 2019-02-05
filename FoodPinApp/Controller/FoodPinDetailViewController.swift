@@ -71,7 +71,7 @@ class FoodPinDetailViewController: UIViewController,UITableViewDelegate,UITableV
             cell.value.text = restaurant?.location
         case 3:
             cell.field.text = "Been here"
-            cell.value.text = restaurant?.isVisited ?? false ? " YES, I've been here before.\(String(describing: restaurant?.rating)) " : "NO"
+            cell.value.text = restaurant?.isVisited ?? false ? restaurant?.rating  : "NO"
         default:
             cell.field.text = ""
             cell.value.text = ""
@@ -99,9 +99,7 @@ class FoodPinDetailViewController: UIViewController,UITableViewDelegate,UITableV
     @IBAction func ratingButonTapped(segue:UIStoryboardSegue){
         if let rating = segue.identifier{
             restaurant?.isVisited = true
-            
-            
-            
+        
             switch rating {
                 
             case "great":
@@ -112,6 +110,10 @@ class FoodPinDetailViewController: UIViewController,UITableViewDelegate,UITableV
                   restaurant?.rating = "I don't like it"
             default:
                     break
+            }
+            
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+                appDelegate.saveContext()
             }
             tableView.reloadData()
         }

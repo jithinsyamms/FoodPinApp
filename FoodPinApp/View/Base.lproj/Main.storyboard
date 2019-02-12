@@ -553,6 +553,80 @@
             </objects>
             <point key="canvasLocation" x="2882" y="-127"/>
         </scene>
+        <!--Walk Through Page View Controller-->
+        <scene sceneID="wJw-TS-tht">
+            <objects>
+                <pageViewController storyboardIdentifier="walkthrough" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="7nQ-Ak-YeY" customClass="WalkThroughPageViewController" customModule="FoodPinApp" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ghK-6F-fKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="15" y="-1014"/>
+        </scene>
+        <!--Walk Through Controller-->
+        <scene sceneID="z2C-ws-EJT">
+            <objects>
+                <viewController storyboardIdentifier="contentviewcontroller" id="tQ9-r2-zMj" customClass="WalkThroughController" customModule="FoodPinApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="alN-1m-n3r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personalize" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-op-4V4">
+                                <rect key="frame" x="99.5" y="50" width="176" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rqo-7P-Hhm">
+                                <rect key="frame" x="30" y="123" width="315" height="232"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="232" id="bIp-uf-8j5"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pin your favorite restaurants and create your own food guide" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnZ-h1-m8v">
+                                <rect key="frame" x="30" y="385" width="315" height="104"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="104" id="WgR-uZ-k6C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4B-PA-x8M">
+                                <rect key="frame" x="321" y="617" width="39" height="30"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextButtonTappedWithSender:" destination="tQ9-r2-zMj" eventType="touchUpInside" id="9B0-AU-iZj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ycI-Ml-3d7" firstAttribute="trailing" secondItem="XnZ-h1-m8v" secondAttribute="trailing" constant="30" id="4Ea-UE-y9M"/>
+                            <constraint firstItem="XnZ-h1-m8v" firstAttribute="top" secondItem="Rqo-7P-Hhm" secondAttribute="bottom" constant="30" id="9cg-JG-j7i"/>
+                            <constraint firstItem="Rqo-7P-Hhm" firstAttribute="leading" secondItem="ycI-Ml-3d7" secondAttribute="leading" constant="30" id="J15-YG-doG"/>
+                            <constraint firstItem="ycI-Ml-3d7" firstAttribute="bottom" secondItem="F4B-PA-x8M" secondAttribute="bottom" constant="20" id="T8t-zr-GaM"/>
+                            <constraint firstItem="SVg-op-4V4" firstAttribute="top" secondItem="ycI-Ml-3d7" secondAttribute="top" constant="30" id="YsJ-JG-P7B"/>
+                            <constraint firstItem="XnZ-h1-m8v" firstAttribute="leading" secondItem="ycI-Ml-3d7" secondAttribute="leading" constant="30" id="bes-ES-P2L"/>
+                            <constraint firstItem="ycI-Ml-3d7" firstAttribute="trailing" secondItem="Rqo-7P-Hhm" secondAttribute="trailing" constant="30" id="cST-ad-fMF"/>
+                            <constraint firstItem="Rqo-7P-Hhm" firstAttribute="top" secondItem="SVg-op-4V4" secondAttribute="bottom" constant="30" id="hfm-Wq-uiY"/>
+                            <constraint firstItem="ycI-Ml-3d7" firstAttribute="trailing" secondItem="F4B-PA-x8M" secondAttribute="trailing" constant="15" id="jXb-LT-4Ka"/>
+                            <constraint firstItem="SVg-op-4V4" firstAttribute="centerX" secondItem="alN-1m-n3r" secondAttribute="centerX" id="rMf-Wv-Fsc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ycI-Ml-3d7"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentImageView" destination="Rqo-7P-Hhm" id="bFQ-fp-Bqn"/>
+                        <outlet property="contentlabel" destination="XnZ-h1-m8v" id="WXK-M3-lSn"/>
+                        <outlet property="forwardButton" destination="F4B-PA-x8M" id="xWO-1g-job"/>
+                        <outlet property="headinglabel" destination="SVg-op-4V4" id="dJx-rX-iAy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jqv-EO-p7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="905" y="-1167"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="HfZ-cT-42q">
             <objects>

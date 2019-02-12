@@ -25,10 +25,20 @@ class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionD
         searchController = UISearchController(searchResultsController: nil)
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchResultsUpdater = self
-        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.tintColor = UIColor.blue
         searchController.searchBar.placeholder = "Search Restaurants.."
-        searchController.searchBar.barTintColor = UIColor(red: 218.0/255.0, green: 100.0/255.0, blue: 70.0/255.0, alpha: 0.5)
+        searchController.searchBar.barTintColor = UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 0.5)
         searchController.dimsBackgroundDuringPresentation = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if !UserDefaults.standard.bool(forKey:"walkthroughDone"){
+            if let controller = storyboard?.instantiateViewController(withIdentifier:"walkthrough") as? WalkThroughPageViewController{
+                present(controller, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     func loadRestaurants(){

@@ -18,6 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.barTintColor = UIColor.black
+        navBarAppearance.tintColor = UIColor.white
+        let titleTextAttribute = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navBarAppearance.titleTextAttributes = titleTextAttribute
+        
+        let tabbarAppearance = UITabBar.appearance()
+        tabbarAppearance.barTintColor = UIColor.black
+        tabbarAppearance.tintColor = UIColor.white
+        //tabbarAppearance.backgroundImage = UIImage(named: "tabbar-background")
+        tabbarAppearance.selectionIndicatorImage = UIImage(named: "tabitem-selected")
+        
         return true
     }
 

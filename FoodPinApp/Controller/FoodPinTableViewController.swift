@@ -29,6 +29,8 @@ class FoodPinTableViewController: UITableViewController,AddRestaurantCompletionD
         searchController.searchBar.placeholder = "Search Restaurants.."
         searchController.searchBar.barTintColor = UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 0.5)
         searchController.dimsBackgroundDuringPresentation = false
+        
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     override func viewDidAppear(_ animated: Bool) {
